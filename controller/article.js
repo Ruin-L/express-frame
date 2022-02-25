@@ -4,7 +4,7 @@
  * @Author: Ruin 🍭
  * @Date: 2022-02-21 14:15:35
  * @LastEditors: 刘引
- * @LastEditTime: 2022-02-25 11:09:55
+ * @LastEditTime: 2022-02-25 15:29:43
  */
 import { modelData } from "../model/index.js";
 import jwt from "../util/jwt.js";
@@ -104,14 +104,12 @@ const updateArticle = async (req, res, next) => {
 const deleteArticle = async (req, res, next) => {
   try {
     let article = req.article;
-    console.log(article);
-    // article = null;
-    // article = "";
+    // 调用remove方法删除
+    await article.remove();
     await article.save();
-    // let msg = "删除成功！";
-    res.status(200).json(article);
+    res.status(204).json(article);
   } catch (error) {
-    res.status(500).json("失败");
+    res.status(404).json("文章不存在");
   }
 };
 
