@@ -4,12 +4,17 @@
  * @Author: Ruin 🍭
  * @Date: 2022-02-18 17:31:00
  * @LastEditors: 刘引
- * @LastEditTime: 2022-02-24 09:18:32
+ * @LastEditTime: 2022-02-25 10:57:15
  */
 import express from "express";
 import articleCtrl from "../controller/article.js";
 import auth from "../middleware/auth.js";
-import { createArticle, getArticle } from "../validator/article.js";
+import {
+  createArticle,
+  getArticle,
+  updateArticle,
+  deleteArticle,
+} from "../validator/article.js";
 
 const router = express.Router();
 
@@ -25,10 +30,20 @@ router.get("/:articleId", getArticle, articleCtrl.getArticle);
 router.post("/", auth.getToken, createArticle, articleCtrl.createArticle);
 
 // 更新文章
-router.put("/:articleId", articleCtrl.updateArticle);
+router.patch(
+  "/:articleId",
+  auth.getToken,
+  updateArticle,
+  articleCtrl.updateArticle
+);
 
 // 删除文章
-router.delete("/:articleId", articleCtrl.deleteArticle);
+router.delete(
+  "/:articleId",
+  auth.getToken,
+  deleteArticle,
+  articleCtrl.deleteArticle
+);
 
 // 添加文章评论
 router.post("/:articleId/comments", articleCtrl.createArticleComment);
