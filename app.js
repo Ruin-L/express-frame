@@ -4,7 +4,7 @@
  * @Author: Ruin 🍭
  * @Date: 2022-02-18 13:41:56
  * @LastEditors: 刘引
- * @LastEditTime: 2022-02-21 16:20:46
+ * @LastEditTime: 2022-02-24 20:21:37
  */
 import express from "express";
 import morgan from "morgan";
@@ -32,3 +32,5 @@ app.use(handleError());
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
+
+// 后面的代码明天再说嘛

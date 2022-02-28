@@ -4,7 +4,7 @@
  * @Author: Ruin 🍭
  * @Date: 2022-02-21 14:15:35
  * @LastEditors: 刘引
- * @LastEditTime: 2022-02-25 15:29:43
+ * @LastEditTime: 2022-02-28 13:00:20
  */
 import { modelData } from "../model/index.js";
 import jwt from "../util/jwt.js";
@@ -30,7 +30,11 @@ const getArticles = async (req, res, next) => {
 
     const articles = await modelData.Article.find(filter)
       .skip(Number.parseInt(offset)) //跳过多少条
-      .limit(Number.parseInt(limit)); //取多少条
+      .limit(Number.parseInt(limit))
+      .sort({
+        // -1代表倒叙 1代表升序
+        createAt: -1,
+      }); //取多少条
     // 获取文章数量
     const articlesCount = await modelData.Article.countDocuments();
     res.status(200).json({ articles, articlesCount });
