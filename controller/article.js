@@ -4,7 +4,7 @@
  * @Author: Ruin 🍭
  * @Date: 2022-02-21 14:15:35
  * @LastEditors: 刘引
- * @LastEditTime: 2022-02-28 13:00:20
+ * @LastEditTime: 2022-03-03 14:02:22
  */
 import { modelData } from "../model/index.js";
 import jwt from "../util/jwt.js";
@@ -55,6 +55,7 @@ const getFeedArticles = async (req, res, next) => {
 // 获取文章
 const getArticle = async (req, res, next) => {
   try {
+    // 将article表中原来的author字段中的内容填充为user中的内容 通过_id进行关联
     const article = await modelData.Article.findById(
       req.params.articleId
     ).populate("author");
